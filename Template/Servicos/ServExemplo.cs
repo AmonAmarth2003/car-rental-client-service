@@ -1,5 +1,6 @@
 ﻿using Exemplo;
 using Template.Infra;
+using Template.Data;
 
 namespace Exemplo
 {

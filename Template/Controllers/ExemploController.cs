@@ -4,18 +4,18 @@ namespace Exemplo
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExemploController : Controller
+    public class ClientController : Controller
     {
         private IServExemplo _servExemplo;
 
-        public ExemploController()
+        public ClientController()
         {
             _servExemplo = new ServExemplo();
         }
 
         [Route("/api/[Controller]/{id}")]
         [HttpGet]
-        public IActionResult Exemplo(int id)
+        public IActionResult Client(int id)
         {
             try
             {
