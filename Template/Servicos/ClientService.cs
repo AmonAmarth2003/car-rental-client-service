@@ -2,6 +2,7 @@
 using Client.API.DTO;
 using Client.API.Enums;
 using Client.API.Mappers;
+using Client.API;
 using Microsoft.EntityFrameworkCore;
 
 namespace Client.API.Services
@@ -9,10 +10,12 @@ namespace Client.API.Services
     internal class ClientService : IClientService
     {
         private readonly DataContext _dataContext;
+        private readonly IExternalApiService _externalApiService;
 
-        public ClientService(DataContext dataContext)
+        public ClientService(DataContext dataContext, IExternalApiService externalApiService)
         {
             _dataContext = dataContext;
+            _externalApiService = externalApiService;
         }
 
         public async Task<List<DetailsClientDto>> GetAllAsync()
@@ -39,6 +42,19 @@ namespace Client.API.Services
 
             client.Status = status;
 
+            
+            if (status == ClientStatus.Blocked)
+            {
+                try
+                {
+                    await _externalApiService.NotifyBlockedClientAsync(client.Id);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            
             await _dataContext.SaveChangesAsync();
             return ClientMapper.ToDetailsDto(client);
         }

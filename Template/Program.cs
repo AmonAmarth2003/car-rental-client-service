@@ -19,6 +19,10 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 
 builder.Services.AddScoped<IClientService, ClientService>();
+// Register external API HTTP client and service
+builder.Services.AddHttpClient<IExternalApiService, ExternalApiService>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["ExternalApi:BaseUrl"] ?? "http://localhost:5090")
+);
 GeradorDeServicos.ServiceProvider = builder.Services.BuildServiceProvider();
 
 var app = builder.Build();
