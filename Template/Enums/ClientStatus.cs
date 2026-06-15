@@ -1,4 +1,4 @@
-﻿namespace Template.Enums
+﻿namespace Client.API.Enums
 {
     public enum ClientStatus
     {

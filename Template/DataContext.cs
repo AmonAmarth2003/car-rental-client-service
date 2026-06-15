@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Template.Entities;
 
-namespace Template.Data
+namespace Client.API.Data
 {
     public class DataContext : DbContext
     {
@@ -9,7 +8,7 @@ namespace Template.Data
         {
         }
 
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Entities.Client> Clients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
