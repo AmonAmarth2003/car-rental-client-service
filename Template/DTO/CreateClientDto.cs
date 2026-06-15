@@ -1,6 +1,6 @@
-﻿namespace Template.DTO
+﻿namespace Client.API.DTO
 {
-    public class CreateClientRequest
+    public class CreateClientDto
     {
         public string Name { get; set; }
         public string CpfNumber { get; set; }

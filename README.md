@@ -50,4 +50,4 @@ The Rental Service is the central service responsible for business rules
 and orchestration.
 
 See full system description:  
-https://github.com/your-org/rental-service
+https://github.com/AmonAmarth2003/car-rental-rental-service

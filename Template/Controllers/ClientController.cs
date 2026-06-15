@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Template.Entities;
-using Template.Enums;
-using Template.Services;
+﻿using Client.API.DTO;
+using Client.API.Enums;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Template.Controllers
+namespace Client.API.Controllers
 {
     [ApiController]
     [Route("clients")]
@@ -25,7 +24,7 @@ namespace Template.Controllers
 
         // POST /clients
         [HttpPost]
-        public async Task<IActionResult> Post(Client client)
+        public async Task<IActionResult> Post(CreateClientDto client)
         {
             var created = await _service.CreateAsync(client);
             return Created("", created);

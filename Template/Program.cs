@@ -1,8 +1,9 @@
-using Exemplo;
+
+using Client.API;
+using Client.API.Data;
+using Client.API.Infra;
+using Client.API.Services;
 using Microsoft.EntityFrameworkCore;
-using Template.Infra;
-using Template.Data;
-using Template.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

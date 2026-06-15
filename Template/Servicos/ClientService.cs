@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Template.Data;
-using Template.Entities;
-using Template.Enums;
+﻿using Client.API.Data;
+using Client.API.DTO;
+using Client.API.Enums;
+using Client.API.Mappers;
+using Microsoft.EntityFrameworkCore;
 
-namespace Template.Services
+namespace Client.API.Services
 {
     internal class ClientService : IClientService
     {
@@ -14,22 +15,24 @@ namespace Template.Services
             _dataContext = dataContext;
         }
 
-        public async Task<List<Client>> GetAllAsync()
+        public async Task<List<DetailsClientDto>> GetAllAsync()
         {
-            return await _dataContext.Clients.ToListAsync();
+            var clients = await _dataContext.Clients.ToListAsync();
+            return clients.Select(ClientMapper.ToDetailsDto).ToList();
         }
 
-        public async Task<Client> CreateAsync(Client client)
+        public async Task<DetailsClientDto> CreateAsync(CreateClientDto clientDto)
         {
-            client.Status = ClientStatus.Active; // default
+            var client = ClientMapper.ToEntity(clientDto);
+            client.Status = ClientStatus.Active;
 
             _dataContext.Clients.Add(client);
             await _dataContext.SaveChangesAsync();
 
-            return client;
+            return ClientMapper.ToDetailsDto(client);
         }
 
-        public async Task<Client?> UpdateStatusAsync(int id, ClientStatus status)
+        public async Task<DetailsClientDto?> UpdateStatusAsync(int id, ClientStatus status)
         {
             var client = await _dataContext.Clients.FindAsync(id);
             if (client == null) return null;
@@ -37,7 +40,7 @@ namespace Template.Services
             client.Status = status;
 
             await _dataContext.SaveChangesAsync();
-            return client;
+            return ClientMapper.ToDetailsDto(client);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Client.API.Enums;
 
-namespace Client.API.Entities
+namespace Client.API.DTO
 {
-    public class Client
+    public class DetailsClientDto
     {
         public int Id { get; set; }
 
@@ -14,6 +14,6 @@ namespace Client.API.Entities
 
         public string Email { get; set; }
 
-        public ClientStatus Status { get; set; }
+        public string Status { get; set; }
     }
 }

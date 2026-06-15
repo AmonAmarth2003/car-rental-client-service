@@ -1,9 +1,11 @@
-﻿using Template.Entities;
-using Template.Enums;
+﻿using Client.API.DTO;
+using Client.API.Enums;
+
+namespace Client.API;
 
 public interface IClientService
 {
-    public Task<List<Client>> GetAllAsync();
-    public Task<Client?> UpdateStatusAsync(int id, ClientStatus status);
-    public Task<Client> CreateAsync(Client client);
+    public Task<List<DetailsClientDto>> GetAllAsync();
+    public Task<DetailsClientDto?> UpdateStatusAsync(int id, ClientStatus status);
+    public Task<DetailsClientDto> CreateAsync(CreateClientDto clientDto);
 }

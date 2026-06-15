@@ -1,6 +1,6 @@
-﻿using Template.Data;
+﻿using Client.API.Data;
 
-namespace Template.Infra
+namespace Client.API.Infra
 {
     public static class GeradorDeServicos
     {
