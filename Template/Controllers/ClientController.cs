@@ -34,12 +34,19 @@ namespace Client.API.Controllers
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] ClientStatus status)
         {
-            var updated = await _service.UpdateStatusAsync(id, status);
+            try
+            {
+                var updated = await _service.UpdateStatusAsync(id, status);
 
-            if (updated == null)
-                return NotFound();
+                if (updated == null)
+                    return NotFound();
 
-            return Ok(updated);
+                return Ok(updated);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Unable to communicate with Rental Service. Fail status update");
+            }
         }
     }
 }
