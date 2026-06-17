@@ -17,9 +17,19 @@ namespace Client.API.Controllers
 
         // GET /clients
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             return Ok(await _service.GetAllAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var client = await _service.GetByIdAsync(id);
+            if (client == null)
+                return NotFound();
+
+            return Ok(client);
         }
 
         // POST /clients

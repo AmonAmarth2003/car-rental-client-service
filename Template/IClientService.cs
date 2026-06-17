@@ -6,6 +6,7 @@ namespace Client.API;
 public interface IClientService
 {
     public Task<List<DetailsClientDto>> GetAllAsync();
+    public Task<DetailsClientDto?> GetByIdAsync(int id);
     public Task<DetailsClientDto?> UpdateStatusAsync(int id, ClientStatus status);
     public Task<DetailsClientDto> CreateAsync(CreateClientDto clientDto);
 }

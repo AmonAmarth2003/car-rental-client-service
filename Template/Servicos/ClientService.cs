@@ -24,6 +24,12 @@ namespace Client.API.Services
             return clients.Select(ClientMapper.ToDetailsDto).ToList();
         }
 
+        public async Task<DetailsClientDto?> GetByIdAsync(int id)
+        {
+            var client = await _dataContext.Clients.FindAsync(id);
+            return client == null ? null : ClientMapper.ToDetailsDto(client);
+        }
+
         public async Task<DetailsClientDto> CreateAsync(CreateClientDto clientDto)
         {
             var client = ClientMapper.ToEntity(clientDto);
